@@ -15,6 +15,11 @@ load_dotenv()
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents)
 
+@bot.event
+async def on_ready():
+    await bot.change_presence(status=discord.Status.idle)
+    print(f'Logged in as {bot.user.name} (ID: {bot.user.id})')
+
 # Create a folder for downloads if it doesn't exist
 os.makedirs("downloads/mp3", exist_ok=True)
 os.makedirs("downloads/mp4", exist_ok=True)
