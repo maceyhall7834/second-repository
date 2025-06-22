@@ -147,9 +147,12 @@ async def ping(ctx):
     Responds to the ping command and sends the response time as a message.
     """
     start_time = time.time()
+    await ctx.send('Pong!')
     end_time = time.time()
     response_time = (end_time - start_time) * 1000  # Convert to milliseconds
-    await ctx.send(f"`Pong. Response Time: {response_time:.2f} ms`")
+
+    # Send the response time as a message
+    await ctx.send(f"Pong. Response Time: {response_time:.2f} ms")
     
     
 keep_alive()
