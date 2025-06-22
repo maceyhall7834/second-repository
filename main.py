@@ -27,18 +27,24 @@ os.makedirs("downloads/mp4", exist_ok=True)
 # Load proxies from a file
 def load_proxies(file_path):
     proxies = []
-    with open(file_path, 'r') as file:
-        for line in file:
-            # Assuming the proxy format is "ip:port"
-            parts = line.split()
-            if len(parts) >= 2:
-                proxy = f"http://{parts[0]}:{parts[1]}"
-                proxies.append(proxy)
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                # Assuming the proxy format is "ip:port"
+                parts = line.strip().split(':')
+                if len(parts) == 2:
+                    proxy = f"http://{parts[0]}:{parts[1]}"
+                    proxies.append(proxy)
+        
+        if not proxies:
+            print("Warning: No proxies found in the file.")
+    except FileNotFoundError:
+        print(f"Error: The file {file_path} was not found.")
+    except Exception as e:
+        print(f"An error occurred while loading proxies: {e}")
+    
     return proxies
-
-# Load proxies from proxies.txt
-proxies = load_proxies('proxies.txt')
-
+    
 async def download_and_convert_with_dropdown(ctx, url, to_mp3=False):
     if not url:
         await ctx.send("`Please provide a URL to convert. Use !convert <url>`")
@@ -138,17 +144,14 @@ async def convert(ctx, url):
 @bot.command()
 async def ping(ctx):
     """
-    Responds to the ping command and sends the response time in an embed.
+    Responds to the ping command and sends the response time as a message.
     """
     start_time = time.time()
-    await ctx.send('Pong!')
     end_time = time.time()
     response_time = (end_time - start_time) * 1000  # Convert to milliseconds
-
-    # Create an embed to send the response time
-    embed = discord.Embed(title="Ping Response Time", color=discord.Color.red())
-    embed.add_field(name="Response Time", value=f"{response_time:.2f} ms", inline=False)
-
+    await ctx.send(f"Pong. Response Time: {response_time:.2f} ms")
+    
+    
 keep_alive()
 # Run the bot with your token
 bot.run(os.getenv('TOKEN'))
