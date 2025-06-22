@@ -24,27 +24,6 @@ async def on_ready():
 os.makedirs("downloads/mp3", exist_ok=True)
 os.makedirs("downloads/mp4", exist_ok=True)
 
-# Load proxies from a file
-def load_proxies(file_path):
-    proxies = []
-    try:
-        with open(file_path, 'r') as file:
-            for line in file:
-                # Assuming the proxy format is "ip:port"
-                parts = line.strip().split(':')
-                if len(parts) == 2:
-                    proxy = f"http://{parts[0]}:{parts[1]}"
-                    proxies.append(proxy)
-        
-        if not proxies:
-            print("Warning: No proxies found in the file.")
-    except FileNotFoundError:
-        print(f"Error: The file {file_path} was not found.")
-    except Exception as e:
-        print(f"An error occurred while loading proxies: {e}")
-    
-    return proxies
-    
 async def download_and_convert_with_dropdown(ctx, url, to_mp3=False):
     if not url:
         await ctx.send("`Please provide a URL to convert. Use !convert <url>`")
@@ -52,6 +31,11 @@ async def download_and_convert_with_dropdown(ctx, url, to_mp3=False):
     try:
         output_folder = f"downloads/{'mp3' if to_mp3 else 'mp4'}"
 
+        # Check if proxies are available
+        if not proxies:
+            await ctx.send("`No proxies available. Please check the proxies.txt file.`")
+            return
+        
         # Choose a random proxy from the list
         proxy = random.choice(proxies)
 
