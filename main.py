@@ -25,6 +25,9 @@ os.makedirs("downloads/mp3", exist_ok=True)
 os.makedirs("downloads/mp4", exist_ok=True)
 
 async def download_and_convert_with_dropdown(ctx, url, to_mp3=False):
+    if not url:
+        await ctx.send("`Please provide a URL to convert. Use !convert <url>`")
+        return
     try:
         output_folder = f"downloads/{'mp3' if to_mp3 else 'mp4'}"
 
