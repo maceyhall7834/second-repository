@@ -149,7 +149,7 @@ async def ping(ctx):
     start_time = time.time()
     end_time = time.time()
     response_time = (end_time - start_time) * 1000  # Convert to milliseconds
-    await ctx.send(f"Pong. Response Time: {response_time:.2f} ms")
+    await ctx.send(f"`Pong. Response Time: {response_time:.2f} ms`")
     
     
 keep_alive()
