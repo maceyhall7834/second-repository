@@ -6,6 +6,7 @@ import asyncio
 import random
 from ping3 import ping  # Make sure to install ping3 with `pip install ping3`
 from dotenv import load_dotenv  # Import dotenv to load environment variables
+from keep_alive import keep_alive
 
 # Load environment variables from .env file
 load_dotenv()
