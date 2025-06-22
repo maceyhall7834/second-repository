@@ -12,7 +12,7 @@ from keep_alive import keep_alive
 load_dotenv()
 
 # Set up the bot with a command prefix
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents)
 
 # Create a folder for downloads if it doesn't exist
