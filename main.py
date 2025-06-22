@@ -119,7 +119,7 @@ async def ping(ctx, ip_address: str = "8.8.8.8"):
     num_pings = 5  # Number of pings to perform
 
     for _ in range(num_pings):
-        response = ping(ip_address)
+        response = await asyncio.get_event_loop().run_in_executor(None, ping, ip_address)
         if response is not None:
             ping_times.append(response * 1000)  # Convert to milliseconds
         await asyncio.sleep(0.5)  # Wait a bit between pings
