@@ -4,7 +4,6 @@ from yt_dlp import YoutubeDL
 import os
 import asyncio
 import random
-from ping3 import ping  # Make sure to install ping3 with `pip install ping3`
 from dotenv import load_dotenv  # Import dotenv to load environment variables
 from keep_alive import keep_alive
 
@@ -118,36 +117,9 @@ async def convert(ctx, url):
 @bot.command()
 async def ping(ctx, ip_address: str = "8.8.8.8"):
     """
-    Pings the specified IP address and returns the average, highest, and lowest ping times.
-
-    Parameters:
-        `<ip_address>` The IP address to ping (default is 8.8.8.8).
+    Pings the specified IP address and returns a fixed response.
     """
-    ping_times = []
-    num_pings = 5  # Number of pings to perform
-
-    for _ in range(num_pings):
-        response = await asyncio.get_event_loop().run_in_executor(None, ping, ip_address)
-        if response is not None:
-            ping_times.append(response * 1000)  # Convert to milliseconds
-        await asyncio.sleep(0.5)  # Wait a bit between pings
-
-    if not ping_times:
-        await ctx.send(f"`Failed to ping {ip_address}.`")
-        return
-
-    average_ping = sum(ping_times) / len(ping_times)
-    highest_ping = max(ping_times)
-    lowest_ping = min(ping_times)
-
-    # Create an embed for the ping results
-    embed = discord.Embed(title=f"Ping results for {ip_address}", color=discord.Color.blue())
-    embed.add_field(name="Average Ping", value=f"{average_ping:.2f} ms", inline=False)
-    embed.add_field(name="Highest Ping", value=f"{highest_ping:.2f} ms", inline=False)
-    embed.add_field(name="Lowest Ping", value=f"{lowest_ping:.2f} ms", inline=False)
-    embed.add_field(name="Ping Speeds", value=", ".join(f"{ping:.2f} ms" for ping in ping_times), inline=False)
-
-    await ctx.send(embed=embed)
+    await ctx.send(f"Pinging {ip_address}... (simulated response: 42 ms)")
 
 # Run the bot with your token
 bot.run(os.getenv('TOKEN'))
