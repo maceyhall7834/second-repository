@@ -24,6 +24,21 @@ async def on_ready():
 os.makedirs("downloads/mp3", exist_ok=True)
 os.makedirs("downloads/mp4", exist_ok=True)
 
+# Load proxies from a file
+def load_proxies(file_path):
+    proxies = []
+    with open(file_path, 'r') as file:
+        for line in file:
+            # Assuming the proxy format is "ip:port"
+            parts = line.split()
+            if len(parts) >= 2:
+                proxy = f"http://{parts[0]}:{parts[1]}"
+                proxies.append(proxy)
+    return proxies
+
+# Load proxies from proxies.txt
+proxies = load_proxies('proxies.txt')
+
 async def download_and_convert_with_dropdown(ctx, url, to_mp3=False):
     if not url:
         await ctx.send("`Please provide a URL to convert. Use !convert <url>`")
