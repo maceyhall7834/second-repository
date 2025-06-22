@@ -115,12 +115,19 @@ async def convert(ctx, url):
     await download_and_convert_with_dropdown(ctx, url, to_mp3=False)
 
 @bot.command()
-async def ping(ctx, ip_address: str = "8.8.8.8"):
+async def ping(ctx):
     """
-    Pings the specified IP address and returns a fixed response.
+    Responds to the ping command and sends the response time in an embed.
     """
-    await ctx.send(f"Pinging {ip_address}... (simulated response: 42 ms)")
+    start_time = time.time()
+    await ctx.send('Pong!')
+    end_time = time.time()
+    response_time = (end_time - start_time) * 1000  # Convert to milliseconds
 
+    # Create an embed to send the response time
+    embed = discord.Embed(title="Ping Response Time", color=discord.Color.red())
+    embed.add_field(name="Response Time", value=f"{response_time:.2f} ms", inline=False)
+
+keep_alive()
 # Run the bot with your token
 bot.run(os.getenv('TOKEN'))
-keep_alive()
