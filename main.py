@@ -143,3 +143,4 @@ async def ping(ctx, ip_address: str = "8.8.8.8"):
 
 # Run the bot with your token
 bot.run(os.getenv('TOKEN'))
+keep_alive()
