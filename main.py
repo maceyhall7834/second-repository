@@ -31,9 +31,13 @@ async def download_and_convert_with_dropdown(ctx, url, to_mp3=False):
     try:
         output_folder = f"downloads/{'mp3' if to_mp3 else 'mp4'}"
 
+        # Choose a random proxy from the list
+        proxy = random.choice(proxies)
+
         ydl_opts = {
             'format': 'bestaudio/best' if to_mp3 else 'bestvideo+bestaudio/best',
             'outtmpl': f"{output_folder}/%(id)s.{ 'mp3' if to_mp3 else 'webm'}",
+            'proxy': proxy,  # Use the selected proxy
         }
 
         conversion_message = await ctx.send("`Getting available qualities...`")
@@ -104,6 +108,7 @@ async def download_and_convert_with_dropdown(ctx, url, to_mp3=False):
     except Exception as e:
         error_message = str(e)
         await ctx.send(f"`An error occurred during conversion. Please check the URL and try again.\nError details: {error_message}`")
+
 
 @bot.command()
 async def convert(ctx, url):
