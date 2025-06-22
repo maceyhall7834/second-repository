@@ -13,7 +13,7 @@ load_dotenv()
 
 # Set up the bot with a command prefix
 intents = discord.Intents.all()
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = commands.Bot(command_prefix='!', intents=intents, self_bot=True)
 
 # Create a folder for downloads if it doesn't exist
 os.makedirs("downloads/mp3", exist_ok=True)
