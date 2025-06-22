@@ -3,6 +3,7 @@ from discord.ext import commands
 from yt_dlp import YoutubeDL
 import os
 import asyncio
+import time
 import random
 from dotenv import load_dotenv  # Import dotenv to load environment variables
 from keep_alive import keep_alive
