@@ -14,7 +14,7 @@ from keep_alive import keep_alive
 
 # Load environment variables from .env file
 load_dotenv()
-bot_token = os.getenv('TOKEN')
+TOKEN = os.getenv('TOKEN')
 
 # Print the retrieved token (for debugging)
 print(f"Retrieved token")
@@ -258,4 +258,4 @@ async def on_ready():
 
 keep_alive()
 # Run the bot with your token
-bot.run('bot_token')
+bot.run(TOKEN)
