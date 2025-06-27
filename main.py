@@ -10,6 +10,7 @@ from datetime import datetime
 from pathlib import Path
 import asyncio
 from dotenv import load_dotenv
+from keep_alive import keep_alive
 
 # Load environment variables from .env file
 load_dotenv()
@@ -255,5 +256,6 @@ async def on_ready():
     activity = discord.Activity(type=discord.ActivityType.watching, name="YouTube | =help")
     await bot.change_presence(activity=activity)
 
+keep_alive()
 # Run the bot with your token
 bot.run('TOKEN')
