@@ -1,6 +1,6 @@
-discord.py==2.0.0  # or the latest version
-pytube==12.1.0  # or the latest version
-yt-dlp==2023.03.01  # or the latest version
-moviepy==1.0.3  # or the latest version
-pydub==0.25.1  # or the latest version
-python-dotenv==0.20.0  # or the latest version
+discord.py
+pytube
+yt-dlp
+moviepy
+pydub
+python-dotenv
