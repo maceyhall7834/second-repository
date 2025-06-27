@@ -1,6 +1,6 @@
 discord.py
 pytube
 yt-dlp
-moviepy
+moviepy==1.0.3
 pydub
 python-dotenv
