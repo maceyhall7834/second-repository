@@ -258,4 +258,4 @@ async def on_ready():
 
 keep_alive()
 # Run the bot with your token
-bot.run('TOKEN')
+bot.run('bot_token')
